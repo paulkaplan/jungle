@@ -1,0 +1,31 @@
+{
+	"Acrylic" : {
+		"1/16 in" : {
+				"Vector Cut" : 			{"speed":40, "power":100},
+				"Vector Engrave" : 	{"speed":100, "power":60},
+				"Raster Engrave" :  {"speed":100, "power":50}
+		},
+		"1/8 in" : {
+			"Vector Cut" : 			{"speed":20, "power":100},
+			"Vector Engrave" : 	{"speed":100, "power":60},
+			"Raster Engrave" :  {"speed":100, "power":50}
+		},
+		"1/4 in" : {
+			"Vector Cut" : 			{"speed":10, "power":100},
+			"Vector Engrave" : 	{"speed":100, "power":60},
+			"Raster Engrave" :  {"speed":100, "power":50}
+		}
+	},
+	"Wood" : {
+		"1/8 in" : {
+			"Vector Cut" : 			{"speed":20, "power":100},
+			"Vector Engrave" : 	{"speed":100, "power":60},
+			"Raster Engrave" :  {"speed":100, "power":50}
+		},
+		"1/4 in":{
+			"Vector Cut" : 			{"speed":"n/a", "power":"n/a"},
+			"Vector Engrave" : 	{"speed":100, "power":60},
+			"Raster Engrave" :  {"speed":100, "power":50}
+		}
+	}
+}

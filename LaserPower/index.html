@@ -1,0 +1,130 @@
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+<link href="style.css" rel="stylesheet" />
+
+
+<style>
+ select {
+   /*background: transparent;*/
+   /*width: 268px;*/
+/*   padding: 5px;
+   margin: 5px;*/
+   min-width:50px;
+   font-size: 13px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+/*   border: 1px solid #4AA9DE;
+*/   /*height: 34px;*/
+   /*-webkit-appearance: none;*/
+   }
+   option:checked { 
+   	color: #f00;
+   }
+   .warning { color: #EF7D74; }
+   .info    { color: #4AA9DE; }
+   #results {
+   	font-size: 1.25em;
+   	font-weight: 700;
+   	padding: 5px;
+   	margin-top:1em;
+   }
+
+   .select-wrapper{ 
+      padding: 5px;
+   		margin: 5px;
+
+ 		}
+ 		.select-wrapper label { padding-bottom:2px;}
+</style>
+
+<body>
+	<div id="laser-power-container" class="container">
+		<div class="row">
+			<!-- <div id="options"> -->
+				<div class="select-wrapper col-sm-1" >
+					<label>Material</label><br />
+					<select data-bind="options: available_materials, value: material" size="5"></select>
+				</div>
+
+				<div class="select-wrapper col-sm-1">
+					<label>Thickness</label><br />
+					<select data-bind="options: available_thickness, value: thickness" size="5"></select>
+				</div>
+
+				<div class="select-wrapper col-sm-2">
+					<label>Cutting Type</label><br />
+					<select data-bind="options: available_types, value: type" size="5"></select>
+				</div>
+			<!-- </div> -->
+			<div class="col-1"></div>
+
+			<div id="results" class="col-4">
+				<!-- <h4 class="info">Settings for 40 watt</h5> -->
+				<p>Speed: <span class="warning" data-bind="text: speed"></span></p>
+				<p>Power: <span class="warning" data-bind="text: power"></span></p>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+<script>
+
+
+var laserPowerData,
+		PowerCalculator;
+
+$.getJSON("laser_power.json", function(d){
+
+	laserPowerData = d;
+	
+	PowerCalculator = new PowerCalculatorMV();
+
+	ko.applyBindings( PowerCalculator,$("#laser-power-container")[0]);
+
+})
+
+var PowerCalculatorMV = function(){
+
+	this.material  = ko.observable("Acrylic");
+	this.thickness = ko.observable("1/4 in");
+	this.type = ko.observable("Vector Cut");
+
+	this.available_materials = ko.computed( function(){
+		var mats = [];
+		for( var key in laserPowerData ){
+			mats.push( key );
+		}
+		return mats.reverse()
+	})
+
+	this.available_thickness = ko.computed( function(){
+		var thicks = [];
+		var material = laserPowerData[this.material()];
+		for( var key in material ){
+			thicks.push( key );
+		}
+		return thicks.reverse()
+	}, this);
+
+	this.available_types = ko.computed( function(){
+		var types = [];
+		var thickness = laserPowerData[this.material()][this.thickness()];
+		for( var key in thickness ){
+			types.push( key );
+		}
+		return types.reverse()
+	}, this);
+
+	this.speed = ko.computed( function(){
+		return laserPowerData[this.material()][this.thickness()][this.type()].speed
+	}, this);
+
+	this.power = ko.computed( function(){
+		return laserPowerData[this.material()][this.thickness()][this.type()].power
+	}, this);
+}
+
+
+</script>
