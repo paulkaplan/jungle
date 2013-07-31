@@ -23,7 +23,7 @@
 			"Raster Engrave" :  {"speed":100, "power":50}
 		},
 		"1/4 in":{
-			"Vector Cut" : 			{"speed":"n/a", "power":"n/a"},
+			"Vector Cut" : 			{"speed":"N/A, too thick", "power":"N/A, too thick"},
 			"Vector Engrave" : 	{"speed":100, "power":60},
 			"Raster Engrave" :  {"speed":100, "power":50}
 		}
