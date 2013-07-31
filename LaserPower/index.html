@@ -1,70 +1,77 @@
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
-<link href="style.css" rel="stylesheet" />
-
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+	<link href="style.css" rel="stylesheet" />
+</head>
 
 <style>
  select {
    /*background: transparent;*/
    /*width: 268px;*/
-/*   padding: 5px;
-   margin: 5px;*/
+   /*padding: 5px;*/
+   padding:2px;
    min-width:50px;
    font-size: 13px;
    line-height: 1;
    border: 0;
    border-radius: 0;
-/*   border: 1px solid #4AA9DE;
-*/   /*height: 34px;*/
+   /*border: 1px solid #4AA9DE;*/
+   /*height: 34px;*/
    /*-webkit-appearance: none;*/
    }
    option:checked { 
    	color: #f00;
    }
-   .warning { color: #EF7D74; }
+   b, .warning { color: #EF7D74; font-weight: 700; }
    .info    { color: #4AA9DE; }
    #results {
-   	font-size: 1.25em;
-   	font-weight: 700;
+   	font-size: 15px; font-weight: 200;
+/*   	font-size: 1.15em;
+   	font-weight: 700;*/
    	padding: 5px;
    	margin-top:1em;
+   border: 1px solid #4AA9DE;
    }
 
    .select-wrapper{ 
       padding: 5px;
-   		margin: 5px;
-
+   		/*margin: 5px;*/
  		}
- 		.select-wrapper label { padding-bottom:2px;}
+ 		.select-wrapper label { font-size: 13px; font-weight: 600; padding-bottom:2px;}
 </style>
 
 <body>
 	<div id="laser-power-container" class="container">
+
 		<div class="row">
 			<!-- <div id="options"> -->
-				<div class="select-wrapper col-sm-1" >
+				<div class="select-wrapper col-sm-2" >
 					<label>Material</label><br />
 					<select data-bind="options: available_materials, value: material" size="5"></select>
 				</div>
 
-				<div class="select-wrapper col-sm-1">
+				<div class="select-wrapper col-sm-2">
 					<label>Thickness</label><br />
 					<select data-bind="options: available_thickness, value: thickness" size="5"></select>
 				</div>
 
-				<div class="select-wrapper col-sm-2">
+				<div class="select-wrapper col-sm-3">
 					<label>Cutting Type</label><br />
 					<select data-bind="options: available_types, value: type" size="5"></select>
 				</div>
-			<!-- </div> -->
-			<div class="col-1"></div>
 
-			<div id="results" class="col-4">
+			<div id="results" class="col-3">
 				<!-- <h4 class="info">Settings for 40 watt</h5> -->
-				<p>Speed: <span class="warning" data-bind="text: speed"></span></p>
-				<p>Power: <span class="warning" data-bind="text: power"></span></p>
+				<p>Speed: <span class="pull-right warning" data-bind="text: speed"></span></p>
+				<p>Power: <span class="pull-right warning" data-bind="text: power"></span></p>
 			</div>
 
+		</div>
+		<div class="row">
+			<!-- <div class="col-sm-12"> -->
+				This widget helps choose the right power and speed settings for a <b>40 watt</b> laser. <br />All values are approximate; you <b>must</b> experiment with your particular laser and particular materials
+			<!-- </div> -->
 		</div>
 	</div>
 </body>
@@ -128,3 +135,4 @@ var PowerCalculatorMV = function(){
 
 
 </script>
+</html>
